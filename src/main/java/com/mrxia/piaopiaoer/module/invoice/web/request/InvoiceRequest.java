@@ -7,6 +7,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -17,6 +18,12 @@ public class InvoiceRequest {
 
     @NotNull(groups = {Update.class, Delete.class}, message = "发票id不能为空")
     private Long id;
+
+    /**
+     * 开票日期
+     */
+    @NotNull(groups = {Create.class, Update.class}, message = "开票日期不能为空")
+    private LocalDate invoiceDate;
 
     /**
      * 客户公司

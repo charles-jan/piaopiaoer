@@ -1,0 +1,18 @@
+.invoice-form {
+    margin-bottom: 15px;
+}
+
+.invoice-form .label {
+    margin-bottom: 0px;
+    width: 70px;
+    font-size: 14px;
+}
+
+.invoice-form .form-group {
+    margin-bottom: .5rem;
+}
+
+.invoice-form .form-control {
+    display: inline-block;
+    vertical-align: middle;
+}

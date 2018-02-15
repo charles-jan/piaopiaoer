@@ -5,8 +5,11 @@ import lombok.EqualsAndHashCode;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * 发票记录实体
@@ -16,6 +19,12 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 public class Invoice extends AbstractPersistable<Long> {
+
+    /**
+     * 开票日期
+     */
+    @Temporal(TemporalType.DATE)
+    private Date invoiceDate;
 
     /**
      * 客户公司

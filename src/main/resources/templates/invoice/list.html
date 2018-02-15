@@ -8,69 +8,113 @@
     <title>发票列表</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap-datepicker3.min.css"/>
+    <link rel="stylesheet" href="/static/css/custom.css"/>
 </head>
 <body>
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <span class="navbar-brand mb-0 h1">发票列表</span>
+        <span class="navbar-brand mb-0 h1">票票儿</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">记发票</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">看公司</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">查记录</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 <div class="container p-3">
-    <form class="p-3" action="/invoice" method="post">
-        <div class="form-group">
-            <label for="customerCompany">客户名称</label>
-            <input type="text" class="form-control" id="customerCompany" name="customerCompany"/>
+    <form class="invoice-form" action="/invoice" method="post">
+        <div class="form-row">
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="customerCompany">客户名称</label>
+                <input class="form-control form-control-sm" type="text" id="customerCompany" name="customerCompany"/>
+            </div>
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="invoiceAmount">开票金额</label>
+                <input class="form-control form-control-sm" type="number" step="0.01" id="invoiceAmount"
+                       name="invoiceAmount"/>
+            </div>
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="status">开票状态</label>
+                <select class="form-control form-control-sm" id="status" name="status">
+                    <option value="0">未开</option>
+                    <option value="1">已开</option>
+                    <option value="2">票样</option>
+                    <option value="3">不处理</option>
+                </select>
+            </div>
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="invoiceSource">票口来源</label>
+                <input class="form-control form-control-sm" type="text" id="invoiceSource"
+                       name="invoiceSource"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">Example select</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+        <div class="form-row">
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="invoiceDate">开票时间</label>
+                <input class="form-control form-control-sm" type="date" id="invoiceDate" name="invoiceDate"/>
+            </div>
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="sendContract">合同原件</label>
+                <select class="form-control form-control-sm" id="sendContract" name="sendContract">
+                    <option value="0">未寄送</option>
+                    <option value="1">已寄送</option>
+                </select>
+            </div>
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="printScreen">打款截图</label>
+                <select class="form-control form-control-sm" id="printScreen" name="printScreen">
+                    <option value="0">无</option>
+                    <option value="1">有</option>
+                </select>
+            </div>
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="goodsSource">提货来源</label>
+                <input class="form-control form-control-sm" type="text" id="goodsSource" name="goodsSource"/>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Confirm identity</button>
+        <div class="form-row">
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="requirementDetail">具体要求</label>
+                <input class="form-control form-control-sm text-control" type="text" id="requirementDetail"
+                          name="requirementDetail"/>
+            </div>
+            <div class="form-group col-lg col-sm-6">
+                <label class="label col-form-label-sm" for="comments">备注</label>
+                <input class="form-control form-control-sm text-control" type="text" id="comments" name="comments"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <button type="reset" class="btn btn-light ml-auto">重置</button>
+            <button type="submit" class="btn btn-primary">提交发票</button>
+        </div>
     </form>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table class="table">
+    <table class="invoice-table table table-hover">
         <thead class="thead-light">
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">日期</th>
+            <th scope="col">客户名称</th>
+            <th scope="col">开票金额</th>
+            <th scope="col">开票状态</th>
+            <th scope="col">票口来源</th>
+            <th scope="col">合同原件</th>
+            <th scope="col">打款截图</th>
+            <th scope="col">提货来源</th>
+            <th scope="col">具体要求</th>
+            <th scope="col">备注</th>
         </tr>
         </thead>
         <tbody>
@@ -96,12 +140,15 @@
     </table>
 </div>
 
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>-->
+<script src="/static/js/jquery-3.2.1.slim.min.js"></script>
 <script src="/static/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/js/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="/static/js/piaopiaoer.js"></script>
 </body>
 </html>
