@@ -1,15 +1,14 @@
 package com.mrxia.piaopiaoer.module.invoice.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.mrxia.piaopiaoer.common.domain.AbstractAuditable;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 发票记录实体
@@ -18,13 +17,12 @@ import javax.persistence.TemporalType;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-public class Invoice extends AbstractPersistable<Long> {
+public class Invoice extends AbstractAuditable<Long> {
 
     /**
      * 开票日期
      */
-    @Temporal(TemporalType.DATE)
-    private Date invoiceDate;
+    private LocalDate invoiceDate;
 
     /**
      * 客户公司
@@ -70,14 +68,4 @@ public class Invoice extends AbstractPersistable<Long> {
      * 提货来源
      */
     private String goodsSource;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
 }

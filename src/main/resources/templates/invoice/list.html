@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh_cn">
+<html lang="zh_cn" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8"/>
@@ -8,7 +8,6 @@
     <title>发票列表</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/static/css/bootstrap-datepicker3.min.css"/>
     <link rel="stylesheet" href="/static/css/custom.css"/>
 </head>
 <body>
@@ -36,7 +35,7 @@
     </div>
 </nav>
 <div class="container p-3">
-    <form class="invoice-form" action="/invoice" method="post">
+    <form class="invoice-form" action="" method="post">
         <div class="form-row">
             <div class="form-group col-lg col-sm-6">
                 <label class="label col-form-label-sm" for="customerCompany">客户名称</label>
@@ -70,15 +69,15 @@
             <div class="form-group col-lg col-sm-6">
                 <label class="label col-form-label-sm" for="sendContract">合同原件</label>
                 <select class="form-control form-control-sm" id="sendContract" name="sendContract">
-                    <option value="0">未寄送</option>
-                    <option value="1">已寄送</option>
+                    <option value="false">未寄送</option>
+                    <option value="true">已寄送</option>
                 </select>
             </div>
             <div class="form-group col-lg col-sm-6">
                 <label class="label col-form-label-sm" for="printScreen">打款截图</label>
                 <select class="form-control form-control-sm" id="printScreen" name="printScreen">
-                    <option value="0">无</option>
-                    <option value="1">有</option>
+                    <option value="false">无</option>
+                    <option value="true">有</option>
                 </select>
             </div>
             <div class="form-group col-lg col-sm-6">
@@ -98,8 +97,8 @@
             </div>
         </div>
         <div class="form-row">
-            <button type="reset" class="btn btn-light ml-auto">重置</button>
-            <button type="submit" class="btn btn-primary">提交发票</button>
+            <button class="btn btn-light ml-auto" type="reset">重置</button>
+            <button class="btn btn-primary" type="button" onclick="invoice.save(this)" >提交发票</button>
         </div>
     </form>
     <table class="invoice-table table table-hover">
@@ -118,23 +117,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr th:each="invoice : ${invoices}">
             <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
+            <td th:text="${invoice.customerCompany}"></td>
+            <td th:text="${invoice.invoiceAmount}"></td>
+            <td th:text="${invoice.status}"></td>
+            <td th:text="${invoice.invoiceSource}"></td>
+            <td th:text="${invoice.sendContract}"></td>
+            <td th:text="${invoice.printScreen}"></td>
+            <td th:text="${invoice.goodsSource}"></td>
+            <td th:text="${invoice.requirementDetail}"></td>
+            <td th:text="${invoice.comments}"></td>
         </tr>
         </tbody>
     </table>
@@ -147,8 +140,6 @@
         crossorigin="anonymous"></script>-->
 <script src="/static/js/jquery-3.2.1.slim.min.js"></script>
 <script src="/static/js/bootstrap.bundle.min.js"></script>
-<script src="/static/js/bootstrap-datepicker.min.js"></script>
-<script src="/static/js/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="/static/js/piaopiaoer.js"></script>
 </body>
 </html>
