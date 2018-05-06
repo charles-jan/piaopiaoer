@@ -1,9 +1,28 @@
+@-webkit-keyframes fadeOut /* Safari 和 Chrome */
+{
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.alert {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    /*-webkit-animation: fadeOut 1s 2s forwards;*/
+    /*animation: fadeOut 1s 2s forwards;*/
+}
+
 .invoice-form {
     margin-bottom: 15px;
 }
 
 .invoice-form .label {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     width: 70px;
     font-size: 14px;
 }

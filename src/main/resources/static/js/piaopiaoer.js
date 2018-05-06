@@ -15,8 +15,8 @@ const apiRequest = function (url, data, method) {
         if (isOk) {
             return data;
         }
-        console.log(data.message);
-        return Promise.reject(data.message);
+        alert.error(data.msg);
+        return Promise.reject(data.msg);
     });
 };
 
@@ -25,10 +25,9 @@ const invoice = (function ($) {
     let save = function (clickButton) {
         let invoiceForm = $(clickButton).parents(".invoice-form");
         let data = invoiceForm.serializeArray().reduce(function(m,o){ m[o.name] = o.value; return m;}, {});
-        console.log(data);
         apiRequest("/invoice", data, "POST")
-            .then(function (result) {
-                console.log(result);
+            .then(function () {
+                alert.success("保存成功");
             });
     };
 
@@ -36,4 +35,42 @@ const invoice = (function ($) {
         save: save
     }
 
+})(jQuery);
+
+const alert = (function ($) {
+
+    let showMessage = function (data) {
+
+            let alert = $(template('alertTpl', data));
+
+            alert.insertAfter('.navbar');
+
+            setTimeout(function () {
+                alert.alert('close');
+            }, 2000)
+
+        },
+        error = function (message) {
+            showMessage({message: message, type: 'danger'});
+        },
+
+        warning = function (message) {
+            showMessage({message: message, type: 'warning'});
+        },
+
+        success = function (message) {
+            showMessage({message: message, type: 'success'});
+        },
+
+        info = function (message) {
+            showMessage({message: message, type: 'info'});
+        };
+
+    return {
+        success: success,
+        error: error,
+        warning: warning,
+        info: info
+    }
+    
 })(jQuery);

@@ -14,8 +14,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <span class="navbar-brand mb-0 h1">票票儿</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -39,7 +38,7 @@
         <div class="form-row">
             <div class="form-group col-lg col-sm-6">
                 <label class="label col-form-label-sm" for="customerCompany">客户名称</label>
-                <input class="form-control form-control-sm" type="text" id="customerCompany" name="customerCompany"/>
+                <input class="form-control form-control-sm" type="text" id="customerCompany" name="customerCompany">
             </div>
             <div class="form-group col-lg col-sm-6">
                 <label class="label col-form-label-sm" for="invoiceAmount">开票金额</label>
@@ -89,7 +88,7 @@
             <div class="form-group col-lg col-sm-6">
                 <label class="label col-form-label-sm" for="requirementDetail">具体要求</label>
                 <input class="form-control form-control-sm text-control" type="text" id="requirementDetail"
-                          name="requirementDetail"/>
+                       name="requirementDetail"/>
             </div>
             <div class="form-group col-lg col-sm-6">
                 <label class="label col-form-label-sm" for="comments">备注</label>
@@ -98,7 +97,7 @@
         </div>
         <div class="form-row">
             <button class="btn btn-light ml-auto" type="reset">重置</button>
-            <button class="btn btn-primary" type="button" onclick="invoice.save(this)" >提交发票</button>
+            <button class="btn btn-primary" type="button" onclick="invoice.save(this)">提交发票</button>
         </div>
     </form>
     <table class="invoice-table table table-hover">
@@ -118,13 +117,13 @@
         </thead>
         <tbody>
         <tr th:each="invoice : ${invoices}">
-            <th scope="row">1</th>
+            <td th:text="${invoice.createTime}"></td>
             <td th:text="${invoice.customerCompany}"></td>
             <td th:text="${invoice.invoiceAmount}"></td>
             <td th:text="${invoice.status}"></td>
             <td th:text="${invoice.invoiceSource}"></td>
-            <td th:text="${invoice.sendContract}"></td>
-            <td th:text="${invoice.printScreen}"></td>
+            <td th:text="${invoice.sendContract ? '已寄送':'未寄送'}"></td>
+            <td th:text="${invoice.printScreen ? '有' : '无'}"></td>
             <td th:text="${invoice.goodsSource}"></td>
             <td th:text="${invoice.requirementDetail}"></td>
             <td th:text="${invoice.comments}"></td>
@@ -132,6 +131,17 @@
         </tbody>
     </table>
 </div>
+
+<script id="alertTpl" type="text/html">
+    <div class="alert alert-{{type}} alert-dismissible fade show" role="alert">
+        <div class="container">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -141,5 +151,6 @@
 <script src="/static/js/jquery-3.2.1.slim.min.js"></script>
 <script src="/static/js/bootstrap.bundle.min.js"></script>
 <script src="/static/js/piaopiaoer.js"></script>
+<script src="/static/js/template.js"></script>
 </body>
 </html>
